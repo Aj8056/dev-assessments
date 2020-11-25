@@ -1,0 +1,102 @@
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 42ab470..10fdb1a 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -431,9 +431,9 @@[m
+       }[m
+     },[m
+     "lodash": {[m
+[31m-      "version": "4.17.15",[m
+[31m-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz",[m
+[31m-      "integrity": "sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==",[m
+[32m+[m[32m      "version": "4.17.20",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz",[m
+[32m+[m[32m      "integrity": "sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==",[m
+       "dev": true[m
+     },[m
+     "log-symbols": {[m
+[36m@@ -498,6 +498,18 @@[m
+         "yargs": "13.3.0",[m
+         "yargs-parser": "13.1.1",[m
+         "yargs-unparser": "1.6.0"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "yargs-parser": {[m
+[32m+[m[32m          "version": "13.1.1",[m
+[32m+[m[32m          "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-13.1.1.tgz",[m
+[32m+[m[32m          "integrity": "sha512-oVAVsHz6uFrg3XQheFII8ESO2ssAf9luWuAd6Wexsu4F3OtIW0o8IribPXYrD4WC24LWtPrJlGy87y5udK+dxQ==",[m
+[32m+[m[32m          "dev": true,[m
+[32m+[m[32m          "requires": {[m
+[32m+[m[32m            "camelcase": "^5.0.0",[m
+[32m+[m[32m            "decamelize": "^1.2.0"[m
+[32m+[m[32m          }[m
+[32m+[m[32m        }[m
+       }[m
+     },[m
+     "ms": {[m
+[36m@@ -813,9 +825,9 @@[m
+       }[m
+     },[m
+     "yargs-parser": {[m
+[31m-      "version": "13.1.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-13.1.1.tgz",[m
+[31m-      "integrity": "sha512-oVAVsHz6uFrg3XQheFII8ESO2ssAf9luWuAd6Wexsu4F3OtIW0o8IribPXYrD4WC24LWtPrJlGy87y5udK+dxQ==",[m
+[32m+[m[32m      "version": "13.1.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-13.1.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-3lbsNRf/j+A4QuSZfDRA7HRSfWrzO0YjqTJd5kjAq37Zep1CEgaYmrH9Q3GwPiB9cHyd1Y1UwggGhJGoxipbzg==",[m
+       "dev": true,[m
+       "requires": {[m
+         "camelcase": "^5.0.0",[m
+[1mdiff --git a/test_1/index.js b/test_1/index.js[m
+[1mindex bb74d0b..fc1f25f 100644[m
+[1m--- a/test_1/index.js[m
+[1m+++ b/test_1/index.js[m
+[36m@@ -11,10 +11,13 @@[m
+  * @returns  {Object[]}[m
+  */[m
+ module.exports = function test1() {[m
+[31m-  let results;[m
+[31m-[m
+[31m-  // Write your code here.  The pre-written lines above and below are just suggestions, feel free to delete[m
+[31m-  // them and start fresh.[m
+[31m-[m
+[32m+[m[32m  var results =[];[m
+[32m+[m[32m  var json = __dirname+"\\test_data.json";[m
+[32m+[m[32m  const fs = require('fs');[m
+[32m+[m[32m  let rawdata = fs.readFileSync(json);[m
+[32m+[m[32m  results = JSON.parse(rawdata);[m
+[32m+[m[32m    for(var i in results){[m
+[32m+[m[32m      results[i].example= results[i].first_name+" "+results[i].last_name+" says "+results[i].catchphrase;[m
+[32m+[m[32m    }[m
+   return results;[m
+ };[m
+[1mdiff --git a/test_2/index.js b/test_2/index.js[m
+[1mindex 5d7f00e..6528969 100644[m
+[1m--- a/test_2/index.js[m
+[1m+++ b/test_2/index.js[m
+[36m@@ -11,11 +11,19 @@[m
+  *[m
+  * @returns  {Object[]}[m
+  */[m
+[31m-module.exports = function test2() {[m
+[31m-  let results;[m
+[31m-[m
+[31m-  // Write your code here.  The pre-written lines above and below are just suggestions, feel free to delete[m
+[31m-  // them and start fresh.[m
+[31m-[m
+[32m+[m[32mmodule.exports = function test2() {[m[41m [m
+[32m+[m[32m  var results = [];[m
+[32m+[m[32m  var jsondata = [];[m
+[32m+[m[32m  const fs = require('fs');[m
+[32m+[m[32m  const test= require('../test_1/index.js');[m
+[32m+[m[32m  jsondata = test.call();[m
+[32m+[m[32m  var searchField = "last_name";[m
+[32m+[m[32m  var searchVal = "Simpson";[m
+[32m+[m[32m  for (var i=0 ; i < jsondata.length ; i++)[m
+[32m+[m[32m  {[m
+[32m+[m[32m      if (jsondata[i][searchField] == searchVal) {[m
+[32m+[m[32m          results.push(jsondata[i]);[m
+[32m+[m[32m      }[m
+[32m+[m[32m  }[m
+   return results;[m
+ };[m

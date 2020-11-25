@@ -11,11 +11,19 @@
  *
  * @returns  {Object[]}
  */
-module.exports = function test2() {
-  let results;
-
-  // Write your code here.  The pre-written lines above and below are just suggestions, feel free to delete
-  // them and start fresh.
-
+module.exports = function test2() { 
+  var results = [];
+  var jsondata = [];
+  const fs = require('fs');
+  const test= require('../test_1/index.js');
+  jsondata = test.call();
+  var searchField = "last_name";
+  var searchVal = "Simpson";
+  for (var i=0 ; i < jsondata.length ; i++)
+  {
+      if (jsondata[i][searchField] == searchVal) {
+          results.push(jsondata[i]);
+      }
+  }
   return results;
 };

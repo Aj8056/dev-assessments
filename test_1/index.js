@@ -11,10 +11,13 @@
  * @returns  {Object[]}
  */
 module.exports = function test1() {
-  let results;
-
-  // Write your code here.  The pre-written lines above and below are just suggestions, feel free to delete
-  // them and start fresh.
-
+  var results =[];
+  var json = __dirname+"\\test_data.json";
+  const fs = require('fs');
+  let rawdata = fs.readFileSync(json);
+  results = JSON.parse(rawdata);
+    for(var i in results){
+      results[i].example= results[i].first_name+" "+results[i].last_name+" says "+results[i].catchphrase;
+    }
   return results;
 };
